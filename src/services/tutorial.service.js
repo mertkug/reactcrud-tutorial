@@ -11,11 +11,13 @@ class TutorialDataService {
     {
         return http.get(`/tutorials/${id}`);
     }
+
     //http://localhost:8080/api/tutorials // {"title:tutorial1,"description:"tutorial des"}
     create(data) {
         console.log(data);
         return http.post("/tutorials",data);
     }
+
     update(id,data) {
         return http.put(`/tutorials/${id}`,data);
     }

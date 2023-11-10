@@ -6,7 +6,7 @@ import Tutorial from "./components/tutorial.component";
 import AddTutorial from "./components/add-tutorial.component";
 import './App.css';
 
-class App extends Component{
+class App extends Component {
   render ()
   {
     return(
@@ -23,9 +23,8 @@ class App extends Component{
           <Link to={"/tutorials"} className="nav-link">Tutorial Listesi</Link>
         </li>
         <li className="nav-item">
-        <Link to={"/add"} className="nav-link">Tutorial Ekle</Link>
+          <Link to={"/add"} className="nav-link">Tutorial Ekle</Link>
         </li>
-
       </ul>
     </div>
   </div>

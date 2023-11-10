@@ -7,10 +7,11 @@ export default class TutorialsList extends Component {
     {
         super(props);
         this.state = {
-            tutorials:[],
-            currentIndex : -1,
-            currentTutorial : null
-        }
+            tutorials: [],
+            currentIndex: -1,
+            currentTutorial: null,
+            searchTerm: "",
+        };
 
     }
 
@@ -39,23 +40,45 @@ export default class TutorialsList extends Component {
         })
     }
 
+    handleSearchChange = (event) => {
+        this.setState({
+            searchTerm: event.target.value,
+        });
+    };
+
     render() {
-        const {tutorials,currentTutorial,currentIndex}  = this.state
+
+        const { tutorials, currentTutorial, currentIndex, searchTerm } = this.state;
+
+        const filteredTutorials = tutorials.filter((tutorial) =>
+            tutorial.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
         return(
             <div className="list row">
               
                 <div className="col-md-6">
                 <h4>Tutorial Listesi</h4>
-                <ul className="list-group">
-                    {tutorials && tutorials.map((tutorial,index)=>( //tutorials array içindeki her bir elemanı tutorial nesnesi olarak kullandık
-                            <li className={"list-group-item " +(index === currentIndex ? "active" : "")}
-                            onClick={() => this.AktifTutorial(tutorial,index)}
-                            key={index}>
+                    <form className="form-inline d-flex">
+                        <input
+                            className="form-control mr-sm-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                            value={searchTerm}
+                            onChange={ this.handleSearchChange }
+                        />
+                    </form>
+                    <ul className="list-group">
+                        {filteredTutorials.map((tutorial, index) => (
+                            <li
+                                className={"list-group-item " + (index === currentIndex ? "active" : "")}
+                                onClick={() => this.AktifTutorial(tutorial, index)}
+                                key={index}
+                            >
                                 {tutorial.title}
-                                </li>
-                    ))}
-                   
-                </ul>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 <div className="col-md-6">
@@ -87,7 +110,5 @@ export default class TutorialsList extends Component {
                 </div>
              </div>
         )
-        
     }
-
 }
